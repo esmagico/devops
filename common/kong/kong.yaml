@@ -1,63 +1,34 @@
 # a very minimal declarative config file
 _format_version: "3.0"
 
-plugins:
-  - name: prometheus
-    enabled: true
-    config:
-      per_consumer: true
-      status_code_metrics: true
-      latency_metrics: true
-      bandwidth_metrics: true
-      upstream_health_metrics: true
+# plugins:
+#   - name: prometheus
+#     enabled: true
+#     config:
+#       per_consumer: true
+#       status_code_metrics: true
+#       latency_metrics: true
+#       bandwidth_metrics: true
+#       upstream_health_metrics: true
 
-  - name: rate-limiting
-    enabled: true
-    config:
-      minute: 100  # Allows 100 RPM
-      policy: local 
-
-
-services:
-  - name: epic_global_ai
-    url: http://epic_global_ai:5000
-    routes:
-    - name: ai_route
-      expression: 'http.path ^= "/ai" '
-      plugins:
-        - name: rate-limiting
-          config:
-            second: 10 
-            policy: local
+#   - name: rate-limiting
+#     enabled: true
+#     config:
+#       minute: 100  # Allows 100 RPM
+#       policy: local 
 
 
-  - name: epic_global_backend
-    url: http://epic_global_backend:3000
-    routes:
-    - name: backend_route
-      expression: 'http.path ^= "/api" '
-      plugins:
-        - name: rate-limiting
-          config:
-            second: 10 
-            policy: local
-    - name: product_registry_sku
-      expression: 'http.path ^= "/api/product-registry/sku" '
-      plugins:
-        - name: rate-limiting
-          config:
-            second: 10
-            policy: local
+# services:
+#   - name: epic_global_ai
+#     url: http://epic_global_ai:5000
+#     routes:
+#     - name: ai_route
+#       expression: 'http.path ^= "/ai" '
+#       plugins:
+#         - name: rate-limiting
+#           config:
+#             second: 10 
+#             policy: local
 
 
-  - name: epic_global_contracts
-    url: http://epic_global_contracts:5000
-    routes:
-    - name: contracts_route
-      expression: 'http.path ^= "/contracts" '
-      plugins:
-        - name: rate-limiting
-          config:
-            second: 10 
-            policy: local
-
+## Onboard your services using the same format
