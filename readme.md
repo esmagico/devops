@@ -50,6 +50,8 @@ In general every project requires observability, ci/cd pipelines, environment ma
 
 1. Go to *Actions* tab in the repo and enable actions
 2. Add `{Environment}_WEBHOOK_PASSWORD` and `{Environment}_WEBHOOK_URL` as repository secrets (the `Environment` here should be in uppercase letters and can be any name that you want to give to environment e.g., DEV)
+3. `Environment}_WEBHOOK_URL = http://IP:PORT`
+
 
 ## Deploying services using Github Action
 
